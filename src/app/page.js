@@ -44,19 +44,6 @@ export default function HomePage() {
 
       {/* Reply Example */}
 
-      {comments.map((replies) => {
-        return (
-          <Reply
-            key={replies.username}
-            replyText={replies.commentText}
-            userImagePath={replies.userImagePath}
-            username={replies.username}
-            likeNum={replies.likeNum}
-            replies={replies.replies}
-          />
-        );
-      })}
-
       {/* map-loop render Comment component here */}
     </div>
   );
