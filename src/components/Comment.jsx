@@ -11,10 +11,6 @@ export const Comment = ({
 }) => {
   const [isLike, setIsLike] = useState(true);
 
-  const repliesInfo = comments.map((comment) => {
-    return comment.replies;
-  });
-
   function checkLike() {
     if (likeNum > 0) {
       return setIsLike(true);
@@ -45,13 +41,17 @@ export const Comment = ({
           </div>
         </div>
       </div>
-      <Reply
-        key={repliesInfo.username}
-        replyText={repliesInfo.replyText}
-        userImagePath={repliesInfo.userImagePath}
-        username={repliesInfo.username}
-        likeNum={repliesInfo.likeNum}
-      />
+      {comments.map((index) => {
+        return (
+          <Reply
+            key={index.replies.username}
+            replyText={index.replies.replyText}
+            userImagePath={index.replies.userImagePath}
+            username={index.replies.username}
+            likeNum={index.replies.likeNum}
+          />
+        );
+      })}
     </div>
   );
 };
