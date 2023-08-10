@@ -2,8 +2,8 @@
 
 import { Comment } from "@/components/Comment";
 import { PostOwner } from "@/components/PostOwner";
-import { Reply } from "@/components/Reply";
 import { comments } from "@/libs/comments";
+import { Reply } from "@/components/Reply";
 
 export default function HomePage() {
   return (
@@ -43,7 +43,20 @@ export default function HomePage() {
       })}
 
       {/* Reply Example */}
-      <Reply />
+
+      {comments.map((replies) => {
+        return (
+          <Reply
+            key={replies.username}
+            replyText={replies.commentText}
+            userImagePath={replies.userImagePath}
+            username={replies.username}
+            likeNum={replies.likeNum}
+            replies={replies.replies}
+          />
+        );
+      })}
+
       {/* map-loop render Comment component here */}
     </div>
   );

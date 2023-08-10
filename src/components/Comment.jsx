@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Reply } from "./Reply";
+import { comments } from "@/libs/comments";
 
 export const Comment = ({
   userImagePath,
@@ -10,12 +11,15 @@ export const Comment = ({
 }) => {
   const [isLike, setIsLike] = useState(true);
 
-  function checkLike(props) {
-    props.likeNum = likeNumber;
-    if (likeNumber > 0) {
-      setIsLike(true);
+  const repliesInfo = comments.map((comment) => {
+    return comment.replies;
+  });
+
+  function checkLike() {
+    if (likeNum > 0) {
+      return setIsLike(true);
     } else {
-      setIsLike(false);
+      return setIsLike(false);
     }
   }
   return (
@@ -36,18 +40,17 @@ export const Comment = ({
           <br />
           <span>{commentText}</span>
           <div className="d-flex align-items-center gap-1">
-            {isLike ? <img src="/like.svg" width={20}></img> : null}
-            {isLike ? <span className="text-muted">{likeNum}</span> : null}
+            {isLike && <img src="/like.svg" width={20}></img>}
+            {isLike && <span className="text-muted">{likeNum}</span>}
           </div>
         </div>
       </div>
       <Reply
-        key={replies.username}
-        replyText={replies.commentText}
-        userImagePath={replies.userImagePath}
-        username={replies.username}
-        likeNum={replies.likeNum}
-        replies={replies.replies}
+        key={repliesInfo.username}
+        replyText={repliesInfo.replyText}
+        userImagePath={repliesInfo.userImagePath}
+        username={repliesInfo.username}
+        likeNum={repliesInfo.likeNum}
       />
     </div>
   );
